@@ -21,10 +21,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.joaonetoc.workoutdiary"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "36372b3d-5232-4f1a-bcf3-a2a6ce18cfc6"
+      }
+    },
+    "owner": "joaonetoc"
   }
 }
