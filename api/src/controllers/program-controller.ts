@@ -2,15 +2,17 @@ import { Request, Response } from "express";
 import { getMongoDBClient } from "../mongodb";
 import { ObjectId } from "mongodb";
 
-export class ExerciseController {
+export class ProgramController {
     async create(request: Request, response: Response) {
           const {client, db} = getMongoDBClient();
           try {
             // Connect the client to the server	(optional starting in v4.7)
             await client.connect();
             // Send a ping to confirm a successful connection
-            const result = await client.db(db).collection('exercise').insertOne({
-              name: request.body.name
+            const result = await client.db(db).collection('program').insertOne({
+              exercises: request.body.exercises,
+              name: request.body.name,
+              days: request.body.days
             });
             await client.close();
             response.json({_id: result.insertedId})
@@ -22,19 +24,25 @@ export class ExerciseController {
 
     async update(request: Request, response: Response) {
           const {client, db} = getMongoDBClient();
+          const info = {
+            exercises: request.body.exercises,
+            name: request.body.name,
+            days: request.body.days
+          }
+
           try {
             // Connect the client to the server	(optional starting in v4.7)
             await client.connect();
             // Send a ping to confirm a successful connection
-            const result = await client.db(db).collection('exercise').updateOne({
+            const result = await client.db(db).collection('program').updateOne({
               _id: new ObjectId(request.params.id!)
             },{
-              '$set': {
-                name: request.body.name
-              }
+              '$set': info
             });
             await client.close();
             response.json({_id: request.params.id})
+          } catch(error: any) {
+            console.log('Error: ' + error.message)
           } finally {
             // Ensures that the client will close when you finish/error
             await client.close();
@@ -47,7 +55,7 @@ export class ExerciseController {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
         // Send a ping to confirm a successful connection
-        const result = await client.db(db).collection('exercise').findOne({
+        const result = await client.db(db).collection('program').findOne({
           _id: new ObjectId(request.params.id)
         })
         await client.close();
@@ -68,7 +76,7 @@ export class ExerciseController {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
         // Send a ping to confirm a successful connection
-        const result = await client.db(db).collection('exercise').find().limit(Infinity).toArray()
+        const result = await client.db(db).collection('program').find().limit(Infinity).toArray()
         await client.close();
         if(!result) {
           response.status(404).send()
@@ -87,7 +95,7 @@ export class ExerciseController {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
         // Send a ping to confirm a successful connection
-        await client.db(db).collection('exercise').deleteOne({
+        await client.db(db).collection('program').deleteOne({
           _id: new ObjectId(request.params.id)
         })
         await client.close();

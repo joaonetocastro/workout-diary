@@ -6,6 +6,5 @@ app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
 // TODO:
-// CRUD EXERCICIO
 // CRUD PROGRAMA DE TREINO
 // CRUD EXECUÇÃO DE TREINO

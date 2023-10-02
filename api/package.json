@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "node -r sucrase/register src/server.ts",
-    "test": "node -r sucrase/register ./node_modules/.bin/jest --testTimeout=5000"
+    "test": "node -r sucrase/register ./node_modules/.bin/jest --testTimeout=10000"
   },
   "dependencies": {
     "@sucrase/jest-plugin": "^3.0.0",

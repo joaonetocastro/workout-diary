@@ -8,7 +8,7 @@ async function makeExercise() {
   const res = await request(app).post("/exercise").send({
     name: faker.person.fullName()
   });
-  return {id: res.body.id}
+  return {id: res.body._id}
 }
 
 describe("GET /api/products", () => {
@@ -23,8 +23,8 @@ describe("GET /api/products", () => {
       name: faker.person.fullName()
     });
     expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty('id');
-    expect(res.body.id).toBeDefined();
+    expect(res.body).toHaveProperty('_id');
+    expect(res.body._id).toBeDefined();
   });
 
     it('should retrieve exercise', async () => {
