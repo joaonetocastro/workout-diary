@@ -14,5 +14,8 @@ app.get('/', (req, res) => {
 
 const exerciseController = new ExerciseController()
 app.post('/exercise', exerciseController.create)
+app.get('/exercise/:id', exerciseController.getById)
+app.put('/exercise/:id', exerciseController.update)
+app.delete('/exercise/:id', exerciseController.delete)
 
 export {app}
