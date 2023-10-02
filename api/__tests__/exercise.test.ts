@@ -12,14 +12,20 @@ async function makeExercise() {
 }
 
 describe("GET /api/products", () => {
-    it("should create exercise", async () => {
-      const res = await request(app).post("/exercise").send({
-        name: faker.person.fullName()
-      });
-      expect(res.statusCode).toBe(200);
-      expect(res.body).toHaveProperty('id');
-      expect(res.body.id).toBeDefined();
+  it.only("should list exercises", async () => {
+    const res = await request(app).get("/exercise").send();
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBeGreaterThan(0);
+  });
+
+  it("should create exercise", async () => {
+    const res = await request(app).post("/exercise").send({
+      name: faker.person.fullName()
     });
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toHaveProperty('id');
+    expect(res.body.id).toBeDefined();
+  });
 
     it('should retrieve exercise', async () => {
       const {id} = await makeExercise()
