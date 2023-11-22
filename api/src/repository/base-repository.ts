@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { GenericPrismaDelegate } from "../utils/prisma";
 
 export class BaseRepository<
     Model,
@@ -9,7 +9,7 @@ export class BaseRepository<
 
     constructor(
         private readonly createModelFn: (data: any) => Model,
-        private prisma: Prisma.ExerciseDelegate
+        private prisma: GenericPrismaDelegate
         ) {}
     
     async create(instance: CreateSchema): Promise<Model> {

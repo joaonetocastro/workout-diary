@@ -17,6 +17,15 @@ model Exercise {
   updatedAt DateTime @updatedAt
 }
 
+model TrainingPlan {
+  id String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name String
+  userId String @db.Uuid
+  user User    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now()) 
+  updatedAt DateTime @updatedAt
+}
+
 model User {
   id String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   fullName String
@@ -24,4 +33,5 @@ model User {
   password String
   createdAt DateTime @default(now()) 
   updatedAt DateTime @updatedAt
+  trainingPlans TrainingPlan[]
 }
