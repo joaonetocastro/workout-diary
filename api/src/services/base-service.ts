@@ -7,7 +7,7 @@ export class BaseService<
     UpdateSchema extends {id: string},
     FilterSchema> {
 
-    constructor(private readonly repository: BaseRepository<
+    constructor(public readonly repository: BaseRepository<
         Model,
         CreateSchema,
         UpdateSchema,
@@ -15,30 +15,30 @@ export class BaseService<
     >) {} 
     
     async getAll(request: Request, response: Response) {
-        const exercises = await this.repository.getAll()
-        response.json(exercises)
+        const instances = await this.repository.getAll()
+        response.json(instances)
     }
     
     async getById(request: Request, response: Response) {
         const id = request.params.id;
-        const exercise = await this.repository.getById(id)
-        response.json(exercise)
+        const instance = await this.repository.getById(id)
+        response.json(instance)
     }
     
     async post(request: Request, response: Response) {
-        const exercise = await this.repository.create(request.body)
-        response.json(exercise)
+        const instance = await this.repository.create(request.body)
+        response.json(instance)
     }
     
     async patch(request: Request, response: Response) {
         const id = request.params.id;
-        const exercise = await this.repository.update({id, ...request.body})
-        response.json(exercise)
+        const instance = await this.repository.update({id, ...request.body})
+        response.json(instance)
     }
 
     async delete(request: Request, response: Response) {
         const id = request.params.id;
-        const exercise = await this.repository.deleteById(id)
-        response.json(exercise)
+        const instance = await this.repository.deleteById(id)
+        response.json(instance)
     }
 }

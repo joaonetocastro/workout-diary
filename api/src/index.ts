@@ -7,6 +7,7 @@ import { UserRouter } from './routers/user-router';
 import { TrainingPlanExerciseRouter } from './routers/training-plan-exercise-router';
 import { TrainingExecutionRouter } from './routers/training-execution-router';
 import { TrainingExecutionExerciseRouter } from './routers/training-execution-exercise-router';
+import { ErrorHandlerMiddleware } from './middlewares/error-handler-middleware';
 
 const app = express();
 const port = 5000;
@@ -31,19 +32,7 @@ app.get('/v1/healthcheck', (req: Request, res: Response) => {
   res.send('Hello, TypeScript with Express!');
 });
 
-app.use((error: any, req: Request, res: Response, next: NextFunction) => { 
-  let message = error.message
-  let source = 'unknown'
-  let treated = false
-
-  if(error.name === 'PrismaClientKnownRequestError') {
-    message = error.meta.message
-    source = 'prisma'
-  }
-
-  logger.error({source, message, treated})
-  res.status(400).json({message: 'Um erro ocorreu'})
-} )
+app.use(ErrorHandlerMiddleware)
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

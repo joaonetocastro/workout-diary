@@ -15,4 +15,9 @@ export interface UpdateUserSchema {
     password?: string
 }
 
+export interface LoginSchema {
+    email: string
+    password: string
+}
+
 export type FilterUserSchema = Partial<User>;
