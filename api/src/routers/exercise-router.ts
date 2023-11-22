@@ -1,11 +1,12 @@
 import { ExerciseService } from "../services/exercise-service";
 import express from 'express'
+import { BaseRouter } from "./base-router";
+import { Exercise } from "../model/exercise-model";
+import { CreateExerciseSchema, FilterExerciseSchema, UpdateExerciseSchema } from "../schemas/exercise-schemas";
 
-export class ExerciseRouter {
-    service: ExerciseService;
-
+export class ExerciseRouter extends BaseRouter<Exercise, CreateExerciseSchema, UpdateExerciseSchema, FilterExerciseSchema> {
     constructor() {
-        this.service = new ExerciseService()
+        super(new ExerciseService())
     }
 
     getExpressRouter() {
