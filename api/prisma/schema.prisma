@@ -13,4 +13,15 @@ datasource db {
 model Exercise {
   id String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name String
+  createdAt DateTime @default(now()) 
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  fullName String
+  email String @unique
+  password String
+  createdAt DateTime @default(now()) 
+  updatedAt DateTime @updatedAt
 }
