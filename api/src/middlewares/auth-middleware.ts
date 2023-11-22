@@ -18,7 +18,6 @@ export const AuthMiddleware = (req: Request, res: Response, next: NextFunction) 
         req.context = {
             decodedJWT: decoded as decodedJWTSchema
         }
-        console.log({decoded})
         next()
     } catch {
         res.status(401).send({ message: "Unauthorized!" })
