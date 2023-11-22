@@ -20,4 +20,10 @@ export interface LoginSchema {
     password: string
 }
 
+export interface decodedJWTSchema {
+    userId: string
+    email: string
+    fullName: string
+}
+
 export type FilterUserSchema = Partial<User>;

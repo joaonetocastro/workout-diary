@@ -8,9 +8,10 @@ import { TrainingPlanExerciseRouter } from './routers/training-plan-exercise-rou
 import { TrainingExecutionRouter } from './routers/training-execution-router';
 import { TrainingExecutionExerciseRouter } from './routers/training-execution-exercise-router';
 import { ErrorHandlerMiddleware } from './middlewares/error-handler-middleware';
+import { AuthMiddleware } from './middlewares/auth-middleware';
 
 const app = express();
-const port = 5000;
+const port = 5001;
 
 const exerciseRouter = new ExerciseRouter()
 const trainingPlanRouter = new TrainingPlanRouter()
@@ -21,9 +22,10 @@ const trainingExecutionExerciseRouter = new TrainingExecutionExerciseRouter()
 
 app.use(express.json())
 
+app.use('/v1/user', userRouter.getExpressRouter())
+app.use(AuthMiddleware)
 app.use('/v1/exercise', exerciseRouter.getExpressRouter())
 app.use('/v1/training-plan', trainingPlanRouter.getExpressRouter())
-app.use('/v1/user', userRouter.getExpressRouter())
 app.use('/v1/training-plan-exercise', trainingPlanExerciseRouter.getExpressRouter())
 app.use('/v1/training-execution', trainingExecutionRouter.getExpressRouter())
 app.use('/v1/training-execution-exercise', trainingExecutionExerciseRouter.getExpressRouter())

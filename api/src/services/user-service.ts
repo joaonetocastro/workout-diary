@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { User } from "../model/user-model";
 import { UserRepository } from "../repository/user-repository";
-import { CreateUserSchema, FilterUserSchema, UpdateUserSchema } from "../schemas/user-schemas";
+import { CreateUserSchema, FilterUserSchema, UpdateUserSchema, decodedJWTSchema } from "../schemas/user-schemas";
 import { BaseService } from "./base-service";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -33,11 +33,12 @@ export class UserService extends BaseService<User, CreateUserSchema, UpdateUserS
             response.status(401).send();
             return;
         }
-        const accessToken = jwt.sign({
+        const decoded: decodedJWTSchema = {
             userId: instance.id,
             email: instance.email, 
             fullName: instance.fullName
-        }, process.env.JWT_SECRET || 'secret', {expiresIn: '7d'})
+        }
+        const accessToken = jwt.sign(decoded, process.env.JWT_SECRET || 'secret', {expiresIn: '7d'})
 
         response.json({accessToken, expiresIn: '7d'})
     }
