@@ -1,22 +1,16 @@
-export interface IExercise {
-    id: string;
+import { BaseModel, IBaseModel } from "./base-model";
+
+export interface IExercise extends IBaseModel{
     name: string;
-    createdAt: Date;
-    updatedAt: Date;
 }
 
-export class Exercise implements IExercise {
-    id: string;
+export class Exercise extends BaseModel implements IExercise {
     name: string;
-    createdAt: Date;
-    updatedAt: Date;
 
     constructor(
         props: IExercise
     ) {
-        this.id = props.id;
+        super(props);
         this.name = props.name;
-        this.createdAt = props.createdAt,
-        this.updatedAt = props.updatedAt
     }
 }
