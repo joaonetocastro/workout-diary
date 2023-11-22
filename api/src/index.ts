@@ -6,6 +6,7 @@ import { logger } from './utils/logger';
 import { UserRouter } from './routers/user-router';
 import { TrainingPlanExerciseRouter } from './routers/training-plan-exercise-router';
 import { TrainingExecutionRouter } from './routers/training-execution-router';
+import { TrainingExecutionExerciseRouter } from './routers/training-execution-exercise-router';
 
 const app = express();
 const port = 5000;
@@ -15,6 +16,7 @@ const trainingPlanRouter = new TrainingPlanRouter()
 const userRouter = new UserRouter()
 const trainingPlanExerciseRouter = new TrainingPlanExerciseRouter()
 const trainingExecutionRouter = new TrainingExecutionRouter()
+const trainingExecutionExerciseRouter = new TrainingExecutionExerciseRouter()
 
 app.use(express.json())
 
@@ -23,6 +25,7 @@ app.use('/v1/training-plan', trainingPlanRouter.getExpressRouter())
 app.use('/v1/user', userRouter.getExpressRouter())
 app.use('/v1/training-plan-exercise', trainingPlanExerciseRouter.getExpressRouter())
 app.use('/v1/training-execution', trainingExecutionRouter.getExpressRouter())
+app.use('/v1/training-execution-exercise', trainingExecutionExerciseRouter.getExpressRouter())
 
 app.get('/v1/healthcheck', (req: Request, res: Response) => {
   res.send('Hello, TypeScript with Express!');

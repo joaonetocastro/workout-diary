@@ -45,6 +45,16 @@ model TrainingExecution {
   updatedAt DateTime @updatedAt
 }
 
+model TrainingExecutionExercise {
+  id String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  trainingExecutionId String @db.Uuid
+  trainingPlanExerciseId String @db.Uuid
+  reps Int
+  weight Int
+  createdAt DateTime @default(now()) 
+  updatedAt DateTime @updatedAt
+}
+
 model User {
   id String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   fullName String
