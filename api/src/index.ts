@@ -1,4 +1,5 @@
 import express, { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
+import cors from 'cors';
 import { ExerciseRouter } from './routers/exercise-router';
 import 'express-async-errors'
 import { TrainingPlanRouter } from './routers/training-plan-router';
@@ -9,7 +10,6 @@ import { TrainingExecutionRouter } from './routers/training-execution-router';
 import { TrainingExecutionExerciseRouter } from './routers/training-execution-exercise-router';
 import { ErrorHandlerMiddleware } from './middlewares/error-handler-middleware';
 import { AuthMiddleware } from './middlewares/auth-middleware';
-
 const app = express();
 const port = 5001;
 
@@ -20,6 +20,7 @@ const trainingPlanExerciseRouter = new TrainingPlanExerciseRouter()
 const trainingExecutionRouter = new TrainingExecutionRouter()
 const trainingExecutionExerciseRouter = new TrainingExecutionExerciseRouter()
 
+app.use(cors())
 app.use(express.json())
 
 app.use('/v1/user', userRouter.getExpressRouter())

@@ -15,7 +15,7 @@ export class BaseService<
     >) {} 
     
     async getAll(request: Request, response: Response) {
-        const instances = await this.repository.getAll()
+        const instances = await this.repository.filter(request.query as FilterSchema)
         response.json(instances)
     }
     
