@@ -8,6 +8,8 @@ import { TrainingPlanExerciseClient } from '@/utils/api/training-plan-exercise-c
 import { Time } from '@/utils/time'
 import { Button, Card, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export default function Home({params}: {params: {id: string}}) {
   const [trainingPlanExercises, setTrainingPlanExercises] = useState<TrainingPlanExercise[]>([])
@@ -97,7 +99,12 @@ export default function Home({params}: {params: {id: string}}) {
     }
   }
 
+  const indexOfCurrentExercise = trainingPlanExercises.indexOf(currentExercise)
 
+  const changeCurrentExercise = (index: number) => {
+    setCurrentExercise(trainingPlanExercises[index])
+  }
+  
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <Card variant='outlined'>
@@ -114,12 +121,15 @@ export default function Home({params}: {params: {id: string}}) {
             </Stack>
 
             {(exercising || resting) && <Typography variant="h5" align="center">{Time.secondsToString(counter)}</Typography>}
-            
-            <Button variant='contained' onClick={proceed}>
-              {!exercising && !resting && 'Começar'}
-              {exercising && 'Continuar'}
-              {resting && 'Começar'}
-              </Button>
+            <Stack direction='row' gap={2}>
+              {indexOfCurrentExercise > 0 && !exercising && <Button variant="contained" onClick={() => changeCurrentExercise(indexOfCurrentExercise-1)}><ArrowBackIosNewIcon /></Button>}
+              <Button variant='contained' color={exercising ? "success" : "primary"} onClick={proceed}>
+                {!exercising && !resting && 'Começar'}
+                {exercising && 'Finalizar'}
+                {resting && 'Começar'}
+                </Button>
+              {(indexOfCurrentExercise < trainingPlanExercises.length - 1) && !exercising && <Button variant="contained" onClick={() => changeCurrentExercise(indexOfCurrentExercise + 1)}><ArrowForwardIosIcon /></Button>}
+            </Stack>
           </Stack>
         </Card>
     </main>

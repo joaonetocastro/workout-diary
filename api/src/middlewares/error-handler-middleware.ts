@@ -10,7 +10,7 @@ export const ErrorHandlerMiddleware = (error: any, req: Request, res: Response, 
       message = error.meta.message
       source = 'prisma'
     }
-  
+
     logger.error({source, message, treated})
     res.status(400).json({message: 'Um erro ocorreu'})
   }

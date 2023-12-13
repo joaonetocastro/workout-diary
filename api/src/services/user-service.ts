@@ -39,8 +39,6 @@ export class UserService extends BaseService<User, CreateUserSchema, UpdateUserS
             fullName: instance.fullName
         }
         const accessToken = jwt.sign(decoded, process.env.JWT_SECRET || 'secret', {expiresIn: '7d'})
-
         response.json({accessToken, expiresIn: '7d'})
     }
-    
 }

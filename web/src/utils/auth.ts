@@ -10,4 +10,8 @@ export class Auth {
     static removeToken() {
         localStorage.removeItem('token');
     }
+
+    static get isAuthenticated() {
+        return !!Auth.getToken()
+    }
 }
