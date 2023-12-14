@@ -8,6 +8,7 @@ export interface CreateTrainingPlanExerciseSchema {
     series: number
     repGoal: number
     weightGoal: number
+    sequence: number
 } 
 
 export interface UpdateTrainingPlanExerciseSchema {
@@ -19,6 +20,7 @@ export interface UpdateTrainingPlanExerciseSchema {
     series?: number
     repGoal?: number
     weightGoal?: number
+    sequence?: number
 }
 
 export type FilterTrainingPlanExerciseSchema = Partial<TrainingPlanExercise>;

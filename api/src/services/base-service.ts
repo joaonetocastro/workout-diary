@@ -15,7 +15,12 @@ export class BaseService<
     >) {} 
     
     async getAll(request: Request, response: Response) {
-        const instances = await this.repository.filter(request.query as FilterSchema)
+        const query = request.query
+        if ('sortBy' in query) {
+            const sortBy = query.sortBy
+            delete query['sortBy']
+        }
+        const instances = await this.repository.filter(query as FilterSchema)
         response.json(instances)
     }
     

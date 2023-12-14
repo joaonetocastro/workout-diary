@@ -8,6 +8,7 @@ export interface ITrainingPlanExercise extends IBaseModel{
     series: number
     repGoal: number
     weightGoal: number
+    sequence: number
 }
 
 export class TrainingPlanExercise extends BaseModel implements ITrainingPlanExercise {
@@ -18,6 +19,7 @@ export class TrainingPlanExercise extends BaseModel implements ITrainingPlanExer
     series: number
     repGoal: number
     weightGoal: number
+    sequence: number
 
     constructor(
         props: ITrainingPlanExercise
@@ -30,5 +32,6 @@ export class TrainingPlanExercise extends BaseModel implements ITrainingPlanExer
         this.series = props.series
         this.repGoal = props.repGoal
         this.weightGoal = props.weightGoal
+        this.sequence = props.sequence
     }
 }

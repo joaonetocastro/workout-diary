@@ -13,7 +13,6 @@ export class BaseRepository<
         ) {}
     
     async create(instance: CreateSchema): Promise<Model> {
-        
         const response = await this.prisma.create({
             data: instance as any
         });
@@ -49,10 +48,18 @@ export class BaseRepository<
         return response ? this.createModelFn(response) : null
     }
 
-    async filter(filter: FilterSchema): Promise<Model[]> {
-        const response = await this.prisma.findMany({
+    async filter(filter: FilterSchema, orderBy: string = ''): Promise<Model[]> {
+        const query: any = {
             where: filter as any
-        });
+        }
+
+        if(orderBy) {
+            query.orderBy = {
+                [orderBy]: 'asc'
+            }
+        }
+        
+        const response = await this.prisma.findMany(query);
         return response.map(this.createModelFn.bind(this))
     }
 }
