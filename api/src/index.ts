@@ -11,7 +11,7 @@ import { TrainingExecutionExerciseRouter } from './routers/training-execution-ex
 import { ErrorHandlerMiddleware } from './middlewares/error-handler-middleware';
 import { AuthMiddleware } from './middlewares/auth-middleware';
 const app = express();
-const port = 5001;
+const port = process.env.PORT || 5001;
 
 const exerciseRouter = new ExerciseRouter()
 const trainingPlanRouter = new TrainingPlanRouter()
