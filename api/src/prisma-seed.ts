@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt'
 
-import { ExerciseRepository } from "./src/repository/exercise-repository"
-import { UserRepository } from "./src/repository/user-repository";
-import { TrainingPlanRepository } from './src/repository/training-plan-repository';
-import { TrainingPlanExerciseRepository } from './src/repository/training-plan-exercise-repository';
+import { ExerciseRepository } from "./repository/exercise-repository"
+import { UserRepository } from "./repository/user-repository";
+import { TrainingPlanRepository } from './repository/training-plan-repository';
+import { TrainingPlanExerciseRepository } from './repository/training-plan-exercise-repository';
 
 async function seed() {
     console.log('Starting Seed')

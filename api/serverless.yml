@@ -1,14 +1,15 @@
-service: workout-diary-api
- 
+service: workout-diary
 provider:
   name: aws
-  runtime: nodejs18.17.0
-  stage: dev
+  stage: ${env:stage}
   region: us-east-1
  
 functions:
   app:
-    handler: index.handler
+    name: workout-diary-${env:stage}
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
+    image: ${env:image}
+    environment:
+      DATABASE_URL: ${env:DATABASE_URL}

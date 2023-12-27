@@ -18,7 +18,7 @@ const userRouter = new UserRouter()
 const trainingPlanExerciseRouter = new TrainingPlanExerciseRouter()
 const trainingExecutionRouter = new TrainingExecutionRouter()
 const trainingExecutionExerciseRouter = new TrainingExecutionExerciseRouter()
-
+console.log('Creating Express App...')
 app.use(cors())
 app.use(express.json())
 
