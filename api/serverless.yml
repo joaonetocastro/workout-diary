@@ -1,15 +1,15 @@
-service: workout-diary
+service: workout-diary-api
 provider:
   name: aws
-  stage: ${env:stage}
+  stage: ${env:STAGE}
   region: us-east-1
  
 functions:
   app:
-    name: workout-diary-${env:stage}
+    name: workout-diary-api-${env:STAGE}
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
-    image: ${env:image}
+    image: ${env:IMAGE}
     environment:
       DATABASE_URL: ${env:DATABASE_URL}

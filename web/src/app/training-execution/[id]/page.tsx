@@ -1,4 +1,3 @@
-'use client'
 import { ExerciseClient } from '@/utils/api/exercise-client'
 import { Exercise } from '@/utils/api/models/exercise'
 import { TrainingPlanExercise } from '@/utils/api/models/training-plan-exercise'
@@ -188,4 +187,8 @@ export default function Home({params}: {params: {id: string}}) {
         </Card>
     </main>
   )
+}
+
+export async function generateStaticParams() {
+  return []
 }

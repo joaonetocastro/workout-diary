@@ -16,7 +16,6 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps --link /app/node_modules ./node_modules
 COPY --link  . .
-RUN rm -rf ./cypress/
 
 ARG NEXT_PUBLIC_API_BASE_URL
 
